@@ -1,0 +1,145 @@
+/* Responsywny dla tabletu (do 800px) */
+@media (max-width: 800px) {
+    .nav-list {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background-color: var(--white);
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        gap: 0;
+        box-shadow: var(--shadow);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 999;
+    }
+    
+    .nav-list.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav-list li {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .nav-list a {
+        display: block;
+        padding: 15px 20px;
+        width: 100%;
+    }
+    
+    .hamburger {
+        display: block;
+    }
+    
+    .hamburger.active .bar:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active .bar:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+    
+    .banner-text h2 {
+        font-size: 1.8rem;
+    }
+    
+    .gallery-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .intro-section h1 {
+        font-size: 2rem;
+    }
+    
+    .form-container {
+        padding: 30px 20px;
+    }
+}
+
+/* Responsywny smartfon (do 500px) */
+@media (max-width: 500px) {
+    .nav-container {
+        height: 60px;
+        padding: 0 15px;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    .banner-container {
+        height: 300px;
+    }
+    
+    .banner-text {
+        bottom: 20px;
+        left: 20px;
+    }
+    
+    .banner-text h2 {
+        font-size: 1.5rem;
+    }
+    
+    .banner-text p {
+        font-size: 0.9rem;
+    }
+    
+    .banner-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .intro-section {
+        padding: 40px 15px;
+    }
+    
+    .intro-section h1 {
+        font-size: 1.8rem;
+    }
+    
+    .intro-section p {
+        font-size: 1rem;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .gallery-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .gallery-item {
+        height: 200px;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .contrast-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .map-container iframe,
+    .video-container iframe {
+        height: 300px;
+    }
+}
