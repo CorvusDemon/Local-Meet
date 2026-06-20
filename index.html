@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalMeet - Platforma spotkań lokalnych</title>
+    <link rel="stylesheet" href="css/contrast.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <button id="contrast-toggle" class="contrast-btn" aria-label="Włącz tryb kontrastowy">
+        <i class="fas fa-adjust"></i>
+    </button>
+    
+    <!-- Nawigacja -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Local<span>Meet</span></a>
+            
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="active">Strona główna</a></li>
+                    <li><a href="wydarzenia.html">Wydarzenia</a></li>
+                    <li><a href="grupy.html">Grupy</a></li>
+                    <li><a href="tworzenie-wydarzenia.html">Utwórz wydarzenie</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                    <li><a href="profil.html">Profil</a></li>
+                </ul>
+            </div>
+            
+            <!-- burger-menu -->
+            <button class="hamburger" id="hamburger" aria-label="Menu mobilne">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+    
+    <section class="banner-section">
+        <div class="banner-container" id="bannerRotator">
+            <div class="banner active">
+                <img src="images/banners/banner1.jpg" alt="Spotkaj nowych ludzi na lokalnych wydarzeniach">
+                <div class="banner-text">
+                    <h2>Znajdź wydarzenia w swojej okolicy</h2>
+                    <p>Dołącz do tysięcy spotkań każdego dnia</p>
+                </div>
+            </div>
+            <div class="banner">
+                <img src="images/banners/banner2.jpg" alt="Rozwijaj swoje zainteresowania z innymi">
+                <div class="banner-text">
+                    <h2>Rozwijaj swoje pasje</h2>
+                    <p>Odkryj grupy o podobnych zainteresowaniach</p>
+                </div>
+            </div>
+            <div class="banner">
+                <img src="images/banners/banner3.jpg" alt="Zostań organizatorem własnych spotkań">
+                <div class="banner-text">
+                    <h2>Zostań organizatorem</h2>
+                    <p>Utwórz własną grupę i organizuj wydarzenia</p>
+                </div>
+            </div>
+        </div>
+        <div class="banner-controls">
+            <button class="banner-btn" id="prevBanner"><i class="fas fa-chevron-left"></i></button>
+            <button class="banner-btn" id="nextBanner"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+    
+    <main class="container">
+        <section class="intro-section">
+            <h1>Platforma dla ludzi. Gdzie zainteresowania stają się przyjaźniami.</h1>
+            <p>Bez względu na Twoje zainteresowania, od wędrówek i czytania po networking i dzielenie się umiejętnościami, na LocalMeet znajdziesz tysiące osób, które je dzielą[citation:1].</p>
+            <a href="tworzenie-wydarzenia.html" class="btn-primary">Utwórz wydarzenie</a>
+        </section>
+        
+        <!-- Google Maps -->
+        <section class="map-section">
+            <h2>Wydarzenia w Twojej okolicy</h2>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3542.1398990433718!2d17.037967045472058!3d51.114527413901854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2spl!4v1768775346971!5m2!1sru!2spl"
+                    width="100%" 
+                    height="400" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy"
+                    title="Mapa lokalizacji wydarzeń we Wrocławiu">
+                </iframe>
+            </div>
+        </section>
+        
+        <!-- YouTube -->
+        <section class="video-section">
+            <h2>Jak zorganizować spotkanie lub wydarzenie networkingowe?</h2>
+               <div style="height: 0px; overflow: hidden; padding-top: 56.25%; position: relative; width: 100%;">
+                    <iframe
+                        style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
+                        src="https://tube.rvere.com/embed?v=EVJMe3KoznA&start=2:26&end=4:32"
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen>
+                    </iframe>
+                </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 LocalMeet.</p>
+            <p>Projekt zaliczeniowy - Vladyslav Holoven</p>
+        </div>
+    </footer>
+    
+    <script src="js/main.js"></script>
+    <script src="js/banner-rotator.js"></script>
+</body>
+</html>

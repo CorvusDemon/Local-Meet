@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt - LocalMeet</title>
+    <link rel="stylesheet" href="css/contrast.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .contact-hero {
+            background: linear-gradient(rgba(66, 133, 244, 0.9), rgba(52, 168, 83, 0.8)), 
+                        url('images/patterns/contact-bg.jpg') center/cover;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: 10px;
+            margin-bottom: 50px;
+        }
+        
+        .contact-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .contact-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        @media (max-width: 900px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-info h2 {
+            color: #4285F4;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .contact-method:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .contact-icon {
+            background: #4285F4;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h3 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .contact-details p {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .contact-details a {
+            color: #4285F4;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-details a:hover {
+            color: #3367d6;
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .social-link {
+            background: #f8f9fa;
+            color: #4285F4;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background: #4285F4;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .faq-section {
+            background: #f8f9fa;
+            padding: 60px 40px;
+            border-radius: 10px;
+            margin: 60px 0;
+        }
+        
+        .faq-section h2 {
+            text-align: center;
+            color: #4285F4;
+            margin-bottom: 40px;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            padding: 20px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #333;
+            transition: background 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+        
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 25px 25px 25px;
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .team-section {
+            margin: 60px 0;
+        }
+        
+        .team-section h2 {
+            text-align: center;
+            color: #4285F4;
+            margin-bottom: 40px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        
+        .member-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .member-info {
+            padding: 25px;
+        }
+        
+        .member-info h3 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .member-role {
+            color: #4285F4;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .member-contact {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .map-container {
+            margin: 60px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <button id="contrast-toggle" class="contrast-btn" aria-label="Włącz tryb kontrastowy">
+        <i class="fas fa-adjust"></i>
+    </button>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Local<span>Meet</span></a>
+            
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="index.html">Strona główna</a></li>
+                    <li><a href="wydarzenia.html">Wydarzenia</a></li>
+                    <li><a href="grupy.html">Grupy</a></li>
+                    <li><a href="tworzenie-wydarzenia.html">Utwórz wydarzenie</a></li>
+                    <li><a href="kontakt.html" class="active">Kontakt</a></li>
+                    <li><a href="profil.html">Profil</a></li>
+                </ul>
+            </div>
+            
+            <button class="hamburger" id="hamburger" aria-label="Menu mobilne">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <section class="contact-hero">
+            <h1>Skontaktuj Się z Nami</h1>
+            <p>Masz pytania, sugestie lub potrzebujesz pomocy? Jesteśmy tu, aby Ci pomóc. Odpowiadamy w ciągu 24 godzin.</p>
+        </section>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Dane kontaktowe</h2>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Adres biura</h3>
+                        <p>LocalMeet</p>
+                        <p>Grabiszyńska 184</p>
+                        <p>53-235 Wrocław, Polska</p>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Telefon</h3>
+                        <p><a href="tel:+48123456789">+48 12 345 67 89</a></p>
+                        <p>Poniedziałek - Piątek: 9:00-17:00</p>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Email</h3>
+                        <p><a href="mailto:kontakt@localmeet.pl">kontakt@localmeet.pl</a></p>
+                        <p>Wsparcie techniczne: <a href="mailto:support@localmeet.pl">support@localmeet.pl</a></p>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Godziny pracy</h3>
+                        <p>Poniedziałek - Piątek: 9:00-17:00</p>
+                        <p>Sobota: 10:00-14:00</p>
+                        <p>Niedziela: nieczynne</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 30px;">Śledź nas w mediach społecznościowych</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="form-container">
+                <h2>Wyślij wiadomość</h2>
+                <form id="contactForm" novalidate>
+                    <div class="form-group">
+                        <label for="name">Imię i nazwisko *</label>
+                        <input type="text" id="name" name="name" placeholder="Wprowadź swoje imię i nazwisko" required>
+                        <div class="error-message" id="nameError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Adres email *</label>
+                        <input type="email" id="email" name="email" placeholder="przyklad@email.com" required>
+                        <div class="error-message" id="emailError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="topic">Temat wiadomości *</label>
+                        <select id="topic" name="topic" required>
+                            <option value="">Wybierz temat</option>
+                            <option value="technical">Problem techniczny</option>
+                            <option value="event">Pytanie o wydarzenie</option>
+                            <option value="group">Pytanie o grupę</option>
+                            <option value="cooperation">Współpraca</option>
+                            <option value="suggestion">Sugestia</option>
+                            <option value="other">Inne</option>
+                        </select>
+                        <div class="error-message" id="topicError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Wiadomość *</label>
+                        <textarea id="message" name="message" rows="6" placeholder="Opisz swój problem lub pytanie szczegółowo..." required></textarea>
+                        <div class="error-message" id="messageError"></div>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="newsletter" name="newsletter" checked>
+                        <label for="newsletter">Chcę otrzymywać newsletter z nowymi wydarzeniami</label>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">Akceptuję <a href="#" style="color: #4285F4;">politykę prywatności</a> *</label>
+                        <div class="error-message" id="termsError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn-primary" style="width: 100%; padding: 16px;">
+                            <i class="fas fa-paper-plane"></i> Wyślij wiadomość
+                        </button>
+                    </div>
+                    
+                    <div id="formSuccess" class="success-message" style="display: none;">
+                        <i class="fas fa-check-circle"></i> Wiadomość została wysłana pomyślnie! Odpowiemy w ciągu 24 godzin.
+                    </div>
+                    
+                    <div id="formError" class="error-message" style="display: none;">
+                        <i class="fas fa-exclamation-triangle"></i> Wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie.
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Mapa  -->
+        <section class="map-container">
+            <h2 style="margin-bottom: 20px; color: #4285F4;">Gdzie nas znajdziesz?</h2>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1489.873683630862!2d16.99188372116087!3d51.09630262947026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470fc221d55b7fab%3A0x6cf29e5efee8b65a!2sCentrum%20Historii%20Zajezdnia!5e0!3m2!1sru!2spl!4v1768780991840!5m2!1sru!2sp"
+                width="100%" 
+                height="400" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy"
+                title="Mapa lokalizacji biura LocalMeet w Krakowie przy ulicy Technologicznej 15">
+            </iframe>
+        </section>
+        
+        <!-- FAQ -->
+        <section class="faq-section">
+            <h2>Często Zadawane Pytania (FAQ)</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Jak mogę utworzyć nowe wydarzenie?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Aby utworzyć nowe wydarzenie, zaloguj się na swoje konto, kliknij "Utwórz wydarzenie" w menu głównym i wypełnij formularz. Możesz dodać szczegóły, zdjęcie, określić liczbę uczestników i ustawić cenę biletu. Po zatwierdzeniu wydarzenie pojawi się w katalogu.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Czy korzystanie z platformy jest płatne?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Podstawowe funkcje platformy są całkowicie darmowe. Możesz przeglądać wydarzenia, dołączać do grup i uczestniczyć w darmowych wydarzeniach bez opłat. Organizatorzy mogą ustalać opłaty za swoje wydarzenia, a platforma pobiera niewielką prowizję od płatnych wydarzeń.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Jak mogę dołączyć do istniejącej grupy?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Przejdź do zakładki "Grupy", przeglądaj dostępne kategorie lub użyj wyszukiwarki. Gdy znajdziesz interesującą Cię grupę, kliknij przycisk "Dołącz do grupy". Niektóre grupy mogą wymagać akceptacji przez administratora przed przyjęciem.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Jak działa system rezerwacji na wydarzenia?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Po znalezieniu wydarzenia, kliknij "Dołącz" lub "Kup bilet". Dla darmowych wydarzeń otrzymasz natychmiastowe potwierdzenie. Dla płatnych wydarzeń zostaniesz przekierowany do bezpiecznej strony płatności. Po dokonaniu płatności bilet pojawi się w Twoim profilu.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Jak mogę edytować moje dane profilowe?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Przejdź do zakładki "Profil" i kliknij przycisk "Edytuj profil". Możesz zmienić swoje dane osobowe, zdjęcie profilowe, zainteresowania i ustawienia powiadomień. Pamiętaj o zapisaniu zmian przed opuszczeniem strony.
+                </div>
+            </div>
+        </section>
+        
+        <!-- Zespół -->
+        <section class="team-section">
+            <h2>Nasz Zespół Wsparcia</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="images/team/support1.jpg" alt="Anna Nowak - Kierownik Działu Wsparcia Klienta" class="member-photo">
+                    <div class="member-info">
+                        <h3>Anna Nowak</h3>
+                        <span class="member-role">Kierownik Działu Wsparcia</span>
+                        <p class="member-contact">anna.nowak@localmeet.pl</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="images/team/support2.jpg" alt="Marek Wiśniewski - Specjalista ds. Wydarzeń" class="member-photo">
+                    <div class="member-info">
+                        <h3>Marek Wiśniewski</h3>
+                        <span class="member-role">Specjalista ds. Wydarzeń</span>
+                        <p class="member-contact">marek.wisniewski@localmeet.pl</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="images/team/support3.jpg" alt="Katarzyna Kowalczyk - Specjalistka ds. Grup" class="member-photo">
+                    <div class="member-info">
+                        <h3>Katarzyna Kowalczyk</h3>
+                        <span class="member-role">Specjalistka ds. Grup</span>
+                        <p class="member-contact">katarzyna.kowalczyk@localmeet.pl</p>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="images/team/support4.jpg" alt="Piotr Lewandowski - Specjalista ds. Technicznych" class="member-photo">
+                    <div class="member-info">
+                        <h3>Piotr Lewandowski</h3>
+                        <span class="member-role">Specjalista ds. Technicznych</span>
+                        <p class="member-contact">piotr.lewandowski@localmeet.pl</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 LocalMeet.</p>
+            <p>Projekt zaliczeniowy - Vladyslav Holoven</p>
+            <div style="margin-top: 15px;">
+                <a href="#" style="color: white; margin: 0 10px;">Polityka prywatności</a> |
+                <a href="#" style="color: white; margin: 0 10px;">Regulamin</a> |
+                <a href="#" style="color: white; margin: 0 10px;">Cookies</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/main.js"></script>
+    <script src="js/form-validation.js"></script>
+    <script>
+        // Skrypt FAQ
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    item.classList.toggle('active');
+                });
+            });
+            
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    let isValid = true;
+                    const name = document.getElementById('name');
+                    const email = document.getElementById('email');
+                    const topic = document.getElementById('topic');
+                    const message = document.getElementById('message');
+                    const terms = document.getElementById('terms');
+                    
+                    if (!name.value.trim()) {
+                        document.getElementById('nameError').textContent = 'Imię i nazwisko jest wymagane';
+                        isValid = false;
+                    } else {
+                        document.getElementById('nameError').textContent = '';
+                    }
+                    
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!email.value.trim()) {
+                        document.getElementById('emailError').textContent = 'Adres email jest wymagany';
+                        isValid = false;
+                    } else if (!emailRegex.test(email.value)) {
+                        document.getElementById('emailError').textContent = 'Wprowadź poprawny adres email';
+                        isValid = false;
+                    } else {
+                        document.getElementById('emailError').textContent = '';
+                    }
+                    
+                    if (!topic.value) {
+                        document.getElementById('topicError').textContent = 'Wybierz temat wiadomości';
+                        isValid = false;
+                    } else {
+                        document.getElementById('topicError').textContent = '';
+                    }
+                    
+                    if (!message.value.trim()) {
+                        document.getElementById('messageError').textContent = 'Wiadomość jest wymagana';
+                        isValid = false;
+                    } else if (message.value.trim().length < 10) {
+                        document.getElementById('messageError').textContent = 'Wiadomość musi zawierać co najmniej 10 znaków';
+                        isValid = false;
+                    } else {
+                        document.getElementById('messageError').textContent = '';
+                    }
+                    
+                    if (!terms.checked) {
+                        document.getElementById('termsError').textContent = 'Musisz zaakceptować politykę prywatności';
+                        isValid = false;
+                    } else {
+                        document.getElementById('termsError').textContent = '';
+                    }
+                    
+                    if (isValid) {
+                        document.getElementById('formSuccess').style.display = 'block';
+                        document.getElementById('formError').style.display = 'none';
+                        
+                        setTimeout(() => {
+                            contactForm.reset();
+                            document.getElementById('formSuccess').style.display = 'none';
+                        }, 3000);
+                    } else {
+                        document.getElementById('formError').style.display = 'block';
+                        document.getElementById('formSuccess').style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

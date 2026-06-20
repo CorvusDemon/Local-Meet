@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupy - LocalMeet</title>
+    <link rel="stylesheet" href="css/contrast.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .groups-hero {
+            background: linear-gradient(rgba(66, 133, 244, 0.9), rgba(52, 168, 83, 0.9)), 
+                        url('images/patterns/group-bg.jpg') center/cover;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .groups-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .groups-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+        
+        .search-button {
+            background: white;
+            color: #4285F4;
+            border: none;
+            padding: 0 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .search-button:hover {
+            background: #f0f0f0;
+        }
+        
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        
+        .category-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            background: white;
+            color: #4285F4;
+        }
+        
+        .groups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .groups-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .group-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .group-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .group-header {
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .group-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .group-card:hover .group-header img {
+            transform: scale(1.05);
+        }
+        
+        .group-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .group-body {
+            padding: 25px;
+        }
+        
+        .group-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .group-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .group-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .group-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .group-meta i {
+            color: #4285F4;
+        }
+        
+        .join-btn {
+            background: #4285F4;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .join-btn:hover {
+            background: #3367d6;
+        }
+        
+        .join-btn.joined {
+            background: #34A853;
+        }
+        
+        .join-btn.joined:hover {
+            background: #2d8f46;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 50px 0;
+        }
+        
+        .pagination-btn {
+            background: white;
+            border: 2px solid #e0e0e0;
+            color: #333;
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .pagination-btn.active, .pagination-btn:hover {
+            background: #4285F4;
+            border-color: #4285F4;
+            color: white;
+        }
+        
+        .create-group-cta {
+            background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 60px 0;
+        }
+        
+        .create-group-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .create-group-cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <button id="contrast-toggle" class="contrast-btn" aria-label="Włącz tryb kontrastowy">
+        <i class="fas fa-adjust"></i>
+    </button>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Local<span>Meet</span></a>
+            
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="index.html">Strona główna</a></li>
+                    <li><a href="wydarzenia.html">Wydarzenia</a></li>
+                    <li><a href="grupy.html" class="active">Grupy</a></li>
+                    <li><a href="tworzenie-wydarzenia.html">Utwórz wydarzenie</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                    <li><a href="profil.html">Profil</a></li>
+                </ul>
+            </div>
+            
+            <button class="hamburger" id="hamburger" aria-label="Menu mobilne">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <section class="groups-hero">
+            <h1>Odkryj Grupy Dla Siebie</h1>
+            <p>Dołącz do społeczności osób o podobnych zainteresowaniach. Znajdź przyjaciół, rozwijaj pasje i twórz niezapomniane wspomnienia.</p>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Szukaj grup (np. programowanie, sport, sztuka)...">
+                <button class="search-button">
+                    <i class="fas fa-search"></i> Szukaj
+                </button>
+            </div>
+            
+            <div class="categories">
+                <button class="category-btn active">Wszystkie</button>
+                <button class="category-btn">Technologia</button>
+                <button class="category-btn">Sport</button>
+                <button class="category-btn">Sztuka</button>
+                <button class="category-btn">Biznes</button>
+                <button class="category-btn">Edukacja</button>
+                <button class="category-btn">Zdrowie</button>
+            </div>
+        </section>
+        
+        <!-- Siatka grup -->
+        <div class="groups-grid">
+            <!-- Grupa 1 -->
+            <div class="group-card">
+                <div class="group-header">
+                    <img src="images/groups/tech-group.jpg" alt="Grupa Tech Enthusiasts Poland">
+                    <div class="group-category">Technologia</div>
+                </div>
+                <div class="group-body">
+                    <h3 class="group-title">Tech Enthusiasts Poland</h3>
+                    <p class="group-description">
+                        Największa społeczność technologiczna w Polsce. Spotkania, warsztaty i networking dla programistów, designerów i wszystkich miłośników tech.
+                    </p>
+                    <div class="group-meta">
+                        <span><i class="fas fa-users"></i> 1,245 członków</span>
+                        <span><i class="fas fa-calendar-alt"></i> 12/miesiąc</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Warszawa</span>
+                    </div>
+                    <button class="join-btn">
+                        <i class="fas fa-plus"></i> Dołącz do grupy
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Grupa 2 -->
+            <div class="group-card">
+                <div class="group-header">
+                    <img src="images/groups/photography-group.jpg" alt="Uczestnicy grupy fotograficznej">
+                    <div class="group-category">Sztuka</div>
+                </div>
+                <div class="group-body">
+                    <h3 class="group-title">Fotografia Amatorska</h3>
+                    <p class="group-description">
+                        Pasjonaci fotografii wszystkich poziomów. Plenery, warsztaty, przeglądy portfolio i wspólne wystawy. Odkryj magię uwieczniania chwil.
+                    </p>
+                    <div class="group-meta">
+                        <span><i class="fas fa-users"></i> 876 członków</span>
+                        <span><i class="fas fa-calendar-alt"></i> 8/miesiąc</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Kraków</span>
+                    </div>
+                    <button class="join-btn joined">
+                        <i class="fas fa-check"></i> Należysz do grupy
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Grupa 3 -->
+            <div class="group-card">
+                <div class="group-header">
+                    <img src="images/groups/business-group.jpg" alt="Spotkanie networkingowe grupy biznesowej">
+                    <div class="group-category">Biznes</div>
+                </div>
+                <div class="group-body">
+                    <h3 class="group-title">Business Networking Kraków</h3>
+                    <p class="group-description">
+                        Network biznesowy dla przedsiębiorców, startupów i profesjonalistów. Wymiana doświadczeń, budowanie relacji i rozwój kariery.
+                    </p>
+                    <div class="group-meta">
+                        <span><i class="fas fa-users"></i> 2,103 członków</span>
+                        <span><i class="fas fa-calendar-alt"></i> 15/miesiąc</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Kraków</span>
+                    </div>
+                    <button class="join-btn">
+                        <i class="fas fa-plus"></i> Dołącz do grupy
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Grupa 4 -->
+            <div class="group-card">
+                <div class="group-header">
+                    <img src="images/groups/hiking-group.jpg" alt="Grupa turystyczna w Tatrach">
+                    <div class="group-category">Sport</div>
+                </div>
+                <div class="group-body">
+                    <h3 class="group-title">Górskie Wędrówki</h3>
+                    <p class="group-description">
+                        Miłośnicy gór i aktywnego wypoczynku. Weekendowe wyprawy, trekkingi, wspólne odkrywanie polskich szlaków górskich.
+                    </p>
+                    <div class="group-meta">
+                        <span><i class="fas fa-users"></i> 543 członków</span>
+                        <span><i class="fas fa-calendar-alt"></i> 6/miesiąc</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Zakopane</span>
+                    </div>
+                    <button class="join-btn">
+                        <i class="fas fa-plus"></i> Dołącz do grupy
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Grupa 5 -->
+            <div class="group-card">
+                <div class="group-header">
+                    <img src="images/groups/book-group.jpg" alt="Członkowie klubu książki dyskutujący">
+                    <div class="group-category">Edukacja</div>
+                </div>
+                <div class="group-body">
+                    <h3 class="group-title">Klub Książki Kraków</h3>
+                    <p class="group-description">
+                        Miłośnicy literatury spotykają się co miesiąc, by dyskutować o wybranej książce. Różne gatunki, różne perspektywy, wspaniałe dyskusje.
+                    </p>
+                    <div class="group-meta">
+                        <span><i class="fas fa-users"></i> 321 członków</span>
+                        <span><i class="fas fa-calendar-alt"></i> 1/miesiąc</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Kraków</span>
+                    </div>
+                    <button class="join-btn">
+                        <i class="fas fa-plus"></i> Dołącz do grupy
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Grupa 6 -->
+            <div class="group-card">
+                <div class="group-header">
+                    <img src="images/groups/yoga-group.jpg" alt="Grupa jogi">
+                    <div class="group-category">Zdrowie</div>
+                </div>
+                <div class="group-body">
+                    <h3 class="group-title">Joga na świeżym powietrzu</h3>
+                    <p class="group-description">
+                        Poranne sesje jogi w parkach Krakowa. Dla wszystkich poziomów zaawansowania. Zacznij dzień z energią i spokojem.
+                    </p>
+                    <div class="group-meta">
+                        <span><i class="fas fa-users"></i> 187 członków</span>
+                        <span><i class="fas fa-calendar-alt"></i> 20/miesiąc</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Kraków</span>
+                    </div>
+                    <button class="join-btn joined">
+                        <i class="fas fa-check"></i> Należysz do grupy
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- pagination -->
+        <div class="pagination">
+            <button class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">4</button>
+            <button class="pagination-btn">5</button>
+            <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        
+        <!-- create-group -->
+        <section class="create-group-cta">
+            <h2>Nie znalazłeś grupy dla siebie?</h2>
+            <p>Stwórz własną społeczność i gromadź ludzi o podobnych zainteresowaniach. Jako organizator zyskujesz narzędzia do zarządzania członkami, wydarzeniami i komunikacją.</p>
+            <a href="tworzenie-wydarzenia.html" class="btn-primary" style="background: white; color: #4285F4; padding: 15px 40px;">
+                <i class="fas fa-plus-circle"></i> Utwórz własną grupę
+            </a>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 LocalMeet.</p>
+            <p>Projekt zaliczeniowy - Vladyslav Holoven</p>
+        </div>
+    </footer>
+    
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const joinButtons = document.querySelectorAll('.join-btn');
+            joinButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.classList.contains('joined')) {
+                        this.classList.remove('joined');
+                        this.innerHTML = '<i class="fas fa-plus"></i> Dołącz do grupy';
+                    } else {
+                        this.classList.add('joined');
+                        this.innerHTML = '<i class="fas fa-check"></i> Należysz do grupy';
+                    }
+                });
+            });
+            
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            const searchButton = document.querySelector('.search-button');
+            const searchInput = document.querySelector('.search-input');
+            
+            searchButton.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            function performSearch() {
+                const query = searchInput.value.trim();
+                if (query) {
+                    alert(`Wyszukiwanie grup: "${query}"`);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

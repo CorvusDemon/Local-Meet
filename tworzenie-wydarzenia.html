@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utwórz wydarzenie - LocalMeet</title>
+    <link rel="stylesheet" href="css/contrast.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <button id="contrast-toggle" class="contrast-btn" aria-label="Włącz tryb kontrastowy">
+        <i class="fas fa-adjust"></i>
+    </button>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Local<span>Meet</span></a>
+            
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="index.html">Strona główna</a></li>
+                    <li><a href="wydarzenia.html">Wydarzenia</a></li>
+                    <li><a href="grupy.html">Grupy</a></li>
+                    <li><a href="tworzenie-wydarzenia.html" class="active">Utwórz wydarzenie</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                    <li><a href="profil.html">Profil</a></li>
+                </ul>
+            </div>
+            
+            <button class="hamburger" id="hamburger" aria-label="Menu mobilne">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <h1 class="page-title">Utwórz nowe wydarzenie</h1>
+        
+        <div class="form-container">
+            <form id="eventForm" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventName">Nazwa wydarzenia *</label>
+                        <input type="text" id="eventName" name="eventName" placeholder="np. Warsztaty programistyczne Python" required>
+                        <div class="error-message" id="eventNameError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventCategory">Kategoria *</label>
+                        <select id="eventCategory" name="eventCategory" required>
+                            <option value="">Wybierz kategorię</option>
+                            <option value="technology">Technologia</option>
+                            <option value="sport">Sport</option>
+                            <option value="art">Sztuka i kultura</option>
+                            <option value="business">Biznes i networking</option>
+                            <option value="education">Edukacja</option>
+                            <option value="social">Spotkania towarzyskie</option>
+                        </select>
+                        <div class="error-message" id="eventCategoryError"></div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventDate">Data wydarzenia *</label>
+                        <input type="date" id="eventDate" name="eventDate" required>
+                        <div class="error-message" id="eventDateError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventTime">Godzina rozpoczęcia *</label>
+                        <input type="time" id="eventTime" name="eventTime" required>
+                        <div class="error-message" id="eventTimeError"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="eventLocation">Miejsce wydarzenia *</label>
+                    <input type="text" id="eventLocation" name="eventLocation" placeholder="np. Centrum Konferencyjne, ul. Warszawska 1, Kraków" required>
+                    <div class="error-message" id="eventLocationError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="maxParticipants">Maksymalna liczba uczestników</label>
+                    <input type="number" id="maxParticipants" name="maxParticipants" min="2" max="500" value="50">
+                    <div class="error-message" id="maxParticipantsError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="eventDescription">Opis wydarzenia *</label>
+                    <textarea id="eventDescription" name="eventDescription" rows="6" placeholder="Opisz szczegóły wydarzenia, plan, co uczestnicy zyskają..." required></textarea>
+                    <div class="error-message" id="eventDescriptionError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="eventImage">Zdjęcie wydarzenia (opcjonalnie)</label>
+                    <input type="file" id="eventImage" name="eventImage" accept="image/*">
+                    <small>Maksymalny rozmiar: 5MB. Dozwolone formaty: JPG, PNG</small>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="isOnline" name="isOnline">
+                    <label for="isOnline">To wydarzenie online</label>
+                </div>
+                
+                <div class="form-group" id="onlineLinkContainer" style="display: none;">
+                    <label for="onlineLink">Link do wydarzenia online</label>
+                    <input type="url" id="onlineLink" name="onlineLink" placeholder="https://meet.google.com/xxx-yyyy-zzz">
+                </div>
+                
+                <div class="form-group">
+                    <label for="eventTags">Tagi (oddziel przecinkami)</label>
+                    <input type="text" id="eventTags" name="eventTags" placeholder="np. python, programowanie, nauka, kodowanie">
+                    <small>Ułatwią znalezienie Twojego wydarzenia</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ticketPrice">Cena biletu (PLN)</label>
+                    <div class="price-input-container">
+                        <input type="number" id="ticketPrice" name="ticketPrice" min="0" step="0.01" value="0">
+                        <span class="currency">PLN</span>
+                    </div>
+                    <small>Wpisz 0 dla wydarzenia darmowego</small>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-calendar-plus"></i> Utwórz wydarzenie
+                    </button>
+                    <button type="reset" class="btn-secondary">Wyczyść formularz</button>
+                </div>
+                
+                <div id="eventFormSuccess" class="success-message" style="display: none;">
+                    <i class="fas fa-check-circle"></i> Wydarzenie zostało utworzone pomyślnie!
+                </div>
+                
+                <div id="eventFormError" class="error-message" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i> Wystąpił błąd podczas tworzenia wydarzenia.
+                </div>
+            </form>
+        </div>
+        
+        <!-- Wskazówki -->
+        <div class="info-box">
+            <h3><i class="fas fa-lightbulb"></i> Wskazówki dotyczące tworzenia wydarzeń</h3>
+            <ul>
+                <li>Opisz wydarzenie jak najdokładniej - to zachęci więcej osób do uczestnictwa</li>
+                <li>Wybierz odpowiednią kategorię, aby Twoje wydarzenie było łatwe do znalezienia</li>
+                <li>Określ realną maksymalną liczbę uczestników</li>
+                <li>Dodaj tagi związane z tematem wydarzenia</li>
+                <li>Jeśli to wydarzenie online, podaj link z wyprzedzeniem</li>
+            </ul>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 LocalMeet.</p>
+            <p>Projekt zaliczeniowy - Vladyslav Holoven</p>
+        </div>
+    </footer>
+    
+    <script src="js/main.js"></script>
+    <script src="js/event-form.js"></script>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mój profil - LocalMeet</title>
+    <link rel="stylesheet" href="css/contrast.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .profile-header {
+            background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/patterns/dots.png') repeat;
+            opacity: 0.1;
+        }
+        
+        .profile-info {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            object-fit: cover;
+        }
+        
+        .profile-details h1 {
+            margin-bottom: 5px;
+            font-size: 2.5rem;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 25px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 900px) {
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .events-list, .groups-list {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .event-card, .group-card {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+        
+        .event-card:hover, .group-card:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .event-card:last-child, .group-card:last-child {
+            border-bottom: none;
+        }
+        
+        .event-date {
+            background: #4285F4;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 80px;
+            margin-right: 20px;
+        }
+        
+        .event-day {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .event-month {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        
+        .event-info h3, .group-info h3 {
+            margin-bottom: 5px;
+        }
+        
+        .event-meta, .group-meta {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .event-meta i, .group-meta i {
+            margin-right: 5px;
+            color: #4285F4;
+        }
+        
+        .group-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        
+        .sidebar {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .badge {
+            background: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .badge i {
+            color: #FFC107;
+        }
+        
+        .settings-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        
+        .settings-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .settings-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .settings-list a {
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+        
+        .settings-list a:hover {
+            color: #4285F4;
+        }
+        
+        .btn-edit-profile {
+            background: white;
+            color: #4285F4;
+            border: 2px solid #4285F4;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .btn-edit-profile:hover {
+            background: #4285F4;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <button id="contrast-toggle" class="contrast-btn" aria-label="Włącz tryb kontrastowy">
+        <i class="fas fa-adjust"></i>
+    </button>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Local<span>Meet</span></a>
+            
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="index.html">Strona główna</a></li>
+                    <li><a href="wydarzenia.html">Wydarzenia</a></li>
+                    <li><a href="grupy.html">Grupy</a></li>
+                    <li><a href="tworzenie-wydarzenia.html">Utwórz wydarzenie</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                    <li><a href="profil.html" class="active">Profil</a></li>
+                </ul>
+            </div>
+            
+            <button class="hamburger" id="hamburger" aria-label="Menu mobilne">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <div class="profile-header">
+            <div class="profile-info">
+                <img src="images/avatars/user1.jpg" alt="Zdjęcie profilowe użytkownika Jan Kowalski" class="profile-avatar">
+                <div class="profile-details">
+                    <h1>Jan Kowalski</h1>
+                    <p><i class="fas fa-map-marker-alt"></i> Wrocław, Polska</p>
+                    <p><i class="fas fa-user-friends"></i> Członek od: Marzec 2024</p>
+                    <button class="btn-edit-profile">
+                        <i class="fas fa-edit"></i> Edytuj profil
+                    </button>
+                </div>
+            </div>
+            
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">Wydarzenia</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">156</span>
+                    <span class="stat-label">Znajomi</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">Grupy</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">42</span>
+                    <span class="stat-label">Organizowane</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-content">
+            <div class="main-column">
+                <section class="events-list">
+                    <h2><i class="fas fa-calendar-alt"></i> Nadchodzące wydarzenia</h2>
+                    
+                    <div class="event-card">
+                        <div class="event-date">
+                            <span class="event-day">15</span>
+                            <span class="event-month">Paź</span>
+                        </div>
+                        <div class="event-info">
+                            <h3>Warsztaty programistyczne Python</h3>
+                            <p class="event-meta">
+                                <i class="fas fa-map-marker-alt"></i> Centrum Konferencyjne, Kraków |
+                                <i class="fas fa-clock"></i> 18:00-21:00 |
+                                <i class="fas fa-users"></i> 24 uczestników
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">
+                            <span class="event-day">22</span>
+                            <span class="event-month">Paź</span>
+                        </div>
+                        <div class="event-info">
+                            <h3>Networking biznesowy Startup Weekend</h3>
+                            <p class="event-meta">
+                                <i class="fas fa-map-marker-alt"></i> Hub Innovation, Warszawa |
+                                <i class="fas fa-clock"></i> 17:30-20:00 |
+                                <i class="fas fa-users"></i> 45 uczestników
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-card">
+                        <div class="event-date">
+                            <span class="event-day">05</span>
+                            <span class="event-month">Lis</span>
+                        </div>
+                        <div class="event-info">
+                            <h3>Spotkanie miłośników fotografii</h3>
+                            <p class="event-meta">
+                                <i class="fas fa-map-marker-alt"></i> Galeria Sztuki, Wrocław |
+                                <i class="fas fa-clock"></i> 19:00-22:00 |
+                                <i class="fas fa-users"></i> 18 uczestników
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <a href="wydarzenia.html" class="btn-primary" style="display: inline-block; margin-top: 15px;">
+                        <i class="fas fa-plus"></i> Znajdź więcej wydarzeń
+                    </a>
+                </section>
+                
+                <section class="groups-list">
+                    <h2><i class="fas fa-users"></i> Moje grupy</h2>
+                    
+                    <div class="group-card">
+                        <img src="images/groups/tech-group.jpg" alt="Logo grupy Tech Enthusiasts Poland" class="group-icon">
+                        <div class="group-info">
+                            <h3>Tech Enthusiasts Poland</h3>
+                            <p class="group-meta">
+                                <i class="fas fa-user-friends"></i> 1245 członków |
+                                <i class="fas fa-calendar"></i> 12 wydarzeń/miesiąc
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="group-card">
+                        <img src="images/groups/photography-group.jpg" alt="Logo grupy Fotografia Amatorska" class="group-icon">
+                        <div class="group-info">
+                            <h3>Fotografia Amatorska</h3>
+                            <p class="group-meta">
+                                <i class="fas fa-user-friends"></i> 876 członków |
+                                <i class="fas fa-calendar"></i> 8 wydarzeń/miesiąc
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="group-card">
+                        <img src="images/groups/business-group.jpg" alt="Logo grupy Business Networking" class="group-icon">
+                        <div class="group-info">
+                            <h3>Business Networking Kraków</h3>
+                            <p class="group-meta">
+                                <i class="fas fa-user-friends"></i> 2103 członków |
+                                <i class="fas fa-calendar"></i> 15 wydarzeń/miesiąc
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <a href="grupy.html" class="btn-primary" style="display: inline-block; margin-top: 15px;">
+                        <i class="fas fa-search"></i> Przeglądaj wszystkie grupy
+                    </a>
+                </section>
+            </div>
+            
+            <div class="sidebar">
+                <h3><i class="fas fa-trophy"></i> Osiągnięcia</h3>
+                <div class="badges-container">
+                    <div class="badge">
+                        <i class="fas fa-star"></i> Aktywny uczestnik
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-calendar-check"></i> 10+ wydarzeń
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-users"></i> Organizator
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-comments"></i> Zaangażowany
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 30px;"><i class="fas fa-cog"></i> Ustawienia konta</h3>
+                <ul class="settings-list">
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-user-edit"></i> Edytuj profil
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-bell"></i> Powiadomienia
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-lock"></i> Prywatność i bezpieczeństwo
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-palette"></i> Motyw i wygląd
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-sign-out-alt"></i> Wyloguj się
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="activity-stats" style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                    <h4><i class="fas fa-chart-line"></i> Aktywność w tym miesiącu</h4>
+                    <div style="margin-top: 15px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span>Wydarzenia uczestnictwa:</span>
+                            <strong>4</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span>Utworzone wydarzenia:</span>
+                            <strong>2</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Nowi znajomi:</span>
+                            <strong>12</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 LocalMeet.</p>
+            <p>Projekt zaliczeniowy - Vladyslav Holoven</p>
+        </div>
+    </footer>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
