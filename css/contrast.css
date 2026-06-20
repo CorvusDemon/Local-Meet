@@ -1,0 +1,69 @@
+/* Tryb kontrastowy dla osób niedowidzących */
+body.high-contrast {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+
+.high-contrast .navbar {
+    background-color: #000000 !important;
+    border-bottom: 3px solid #ffff00 !important;
+}
+
+.high-contrast .logo {
+    color: #ffff00 !important;
+}
+
+.high-contrast .nav-list a {
+    color: #ffffff !important;
+    border: 1px solid #ffff00 !important;
+}
+
+.high-contrast .nav-list a:hover,
+.high-contrast .nav-list a.active {
+    background-color: #ffff00 !important;
+    color: #000000 !important;
+}
+
+.high-contrast .banner-text h2,
+.high-contrast .banner-text p {
+    color: #ffff00 !important;
+    text-shadow: 2px 2px 0 #000000;
+}
+
+.high-contrast .form-container,
+.high-contrast .gallery-item {
+    background-color: #000000 !important;
+    border: 2px solid #ffff00 !important;
+}
+
+.high-contrast input,
+.high-contrast select,
+.high-contrast textarea {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffff00 !important;
+}
+
+.high-contrast .btn-primary {
+    background-color: #ffff00 !important;
+    color: #000000 !important;
+    border: 2px solid #ffff00 !important;
+}
+
+.high-contrast .error-message {
+    color: #ff0000 !important;
+    font-weight: bold;
+}
+
+.high-contrast footer {
+    background-color: #000000 !important;
+    border-top: 3px solid #ffff00 !important;
+}
+
+.high-contrast .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.95) !important;
+}
+
+.high-contrast .modal-content img {
+    border: 3px solid #ffff00 !important;
+}
